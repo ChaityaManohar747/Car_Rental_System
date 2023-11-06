@@ -124,9 +124,37 @@ include("connect.php");
      }
 ?>
 
+<h2 class="users">Update an User</h2>
+<div class="add">
+<form action="" method="POST">
+    <input type="number" required="" placeholder="ID" name="id">
+    <input type="text" required="" placeholder="Username" name="username">
+    <input type="passwword" required="" placeholder="password" name="pass">
+    <input type="text" required="" placeholder="type" name="type">
+    <button type="submit" name="update">Update user</button>
+</form>
+</div>
 <?php
- // Car customization
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['update'])) {
+        $_userid = $_POST['id'];
+        $_username = $_POST['username'];
+        $_pass = $_POST['pass'];
+        $_type = $_POST['type'];
+
+        $query = "UPDATE `user` SET `username`='$_username', `password`='$_pass', `type`='$_type' WHERE `user_id`='$_userid'";
+        $result = mysqli_query($con, $query);
+
+        if ($result) {
+            // User updated successfully
+        } else {
+            echo "Update failed";
+        }
+    }
+}
 ?>
+
+
 
 <div class="heading"><h2 class="users">Cars</h2></div>
 
@@ -216,10 +244,35 @@ include("connect.php");
      }
 ?>
 
+<h2 class="users">Update a car</h2>
+<div class="add">
+<form action="" method="POST">
+    <input type="text" required="" placeholder="regno" name="regno">
+    <input type="text" required="" placeholder="model" name="model">
+    <input type="text" required="" placeholder="mileage" name="mileage">
+    <input type="text" required="" placeholder="category" name="category">
+    <button type="submit" name="update_car">Update car</button>
+</form>
+</div>
 <?php
-// User present Bookings
-?>
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['update_car'])) {
+        $_regno = $_POST['regno'];
+        $_model = $_POST['model'];
+        $_mileage = $_POST['mileage'];
+        $_category = $_POST['category'];
 
+        $query = "UPDATE `car_info` SET `model_name`='$_model', `mileage`='$_mileage', `car_category`='$_category' WHERE `reg_no`='$_regno'";
+        $result = mysqli_query($con, $query);
+
+        if ($result) {
+            // Car updated successfully
+        } else {
+            echo "Update failed";
+        }
+    }
+}
+?>
 
 <div class="heading"><h2 class="users">Present Bookings</h2></div>
 
@@ -253,7 +306,6 @@ include("connect.php");
       </tr>";
         
     }
-
   ?>
 
 </tbody>
